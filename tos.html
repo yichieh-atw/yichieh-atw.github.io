@@ -25,22 +25,24 @@
 	$("#again").hide();
 	$("#sure").click(function(){
 		$("#hunter li").remove();
-		var times = $(".times").val();
-		var person = ["小傑","酷拉皮卡","奇犽","西索","雷歐力","比司吉","伊耳謎"];
-		var rate = [7.73,12.78,8.52,17.19,19.09,14.98,19.72];
-		var result = [];
+		let times = $(".times").val();
+		const person = ["小傑","酷拉皮卡","奇犽","西索","雷歐力","比司吉","伊耳謎"];
+		const rate = [7.73,12.78,8.52,17.19,19.09,14.98,19.72];
+		const result = [];
+		let n = 0;
+
 		if (times == '') {
-			var n = 5;
+			n = 5;
 		} else {
-			var n = times;
+			n = times;
 		}
 
-		for(var i = 0; i < n; i ++) {
+		for(let i = 0; i < n; i ++) {
 			result.push(random_rate(person,rate));
 		}
 
 		$.each(result,function(k,v){
-			var num = k + 1;
+			let num = k + 1;
 			$("#hunter").append("<li>"+ num + " . "  + v + "</li>");
 			if (v == '小傑' || v == '酷拉皮卡' || v == '奇犽') {
 				$("#hunter li").eq(k).css({"color":"red","font-weight": "bold"});
@@ -56,19 +58,21 @@
 
 	//隨機獎勵機率
 	function random_rate(items, rate) {
-	    var total = eval(rate.join("+"));
+		let total = eval(rate.join("+"));
 	    // 機率總合
-	    var randomArray = [];
-		var newArray = [];
-	    for (var i = 0; i < items.length; i++) {
-	        for (var j = 0; j < rate[i]; j++) {
+	    const randomArray = [];
+		let initkey = 0;
+
+	    while (initkey < items.length) {
+	        for (let j = 0; j < rate[initkey]; j++) {
 				//過濾出符合 小於 rate 陣列裡的機率; ex: j= 0 j < 7.73 (0,1,2,3,4,5,6,7)
-	            randomArray.push(i);
-	        }
+				randomArray[randomArray.length] = items[initkey];
+			}
+			initkey++;
 		}
-		
-		var randKey = Math.floor(Math.random() * total);
-		return items[randomArray[randKey]];
+
+		let randKey = Math.floor(Math.random() * total);
+		return randomArray[randKey];
 	}
 	</script>
 </body>
