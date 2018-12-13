@@ -26,8 +26,8 @@
 	$("#sure").click(function(){
 		$("#hunter li").remove();
 		var times = $(".times").val();
-		var items = ["小傑","酷拉皮卡","奇犽","西索","雷歐力","比司吉","伊耳謎"];
-		var weight = [7.73,12.78,8.52,17.19,19.09,14.98,19.72];
+		var person = ["小傑","酷拉皮卡","奇犽","西索","雷歐力","比司吉","伊耳謎"];
+		var rate = [7.73,12.78,8.52,17.19,19.09,14.98,19.72];
 		var result = [];
 		if (times == '') {
 			var n = 5;
@@ -36,7 +36,7 @@
 		}
 
 		for(var i = 0; i < n; i ++) {
-			result.push(weightedRandom(items,weight));
+			result.push(random_rate(person,rate));
 		}
 
 		$.each(result,function(k,v){
@@ -55,17 +55,20 @@
 	});
 
 	//隨機獎勵機率
-	function weightedRandom(items, itemsWeight) {
-	    var totalWeight = eval(itemsWeight.join("+"));
-	    // 100
+	function random_rate(items, rate) {
+	    var total = eval(rate.join("+"));
+	    // 機率總合
 	    var randomArray = [];
+		var newArray = [];
 	    for (var i = 0; i < items.length; i++) {
-	        for (var j = 0; j < itemsWeight[i]; j++) {
+	        for (var j = 0; j < rate[i]; j++) {
+				//過濾出符合 小於 rate 陣列裡的機率; ex: j= 0 j < 7.73 (0,1,2,3,4,5,6,7)
 	            randomArray.push(i);
 	        }
 		}
-	    var randomNumber = Math.floor(Math.random() * totalWeight);
-	    return items[randomArray[randomNumber]];
+		
+		var randKey = Math.floor(Math.random() * total);
+		return items[randomArray[randKey]];
 	}
 	</script>
 </body>
