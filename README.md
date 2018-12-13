@@ -1,1 +1,1 @@
-手遊機率調整 ， [連結](https://yichieh-atw.github.io/tos.html)
+手遊機率調整 ， [點我進入](https://yichieh-atw.github.io/tos.html)
